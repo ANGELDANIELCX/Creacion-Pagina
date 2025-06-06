@@ -8,5 +8,6 @@ namespace PAGINA_CREACION.Models
     {
         public string NombreIntegrante1 { get; set;}
         public string NombreIntegrante2 { get; set;}
+        
     }
 }
