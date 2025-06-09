@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PAGINA_CREACION.Models;
+using MongoDB.Driver;
 
 namespace PAGINA_CREACION.Controllers.Api;
 
@@ -17,5 +18,14 @@ public class MyProyectoController : ControllerBase
     };
     return Ok(proyecto);
 }
+    [HttpGet("presentacion")]
+    public IActionResult Presentacion()
+    {
+        MongoClient client = new MongoClient(CadenaConexion.Mongo_DB);
+        var db = client.GetDatabase("Escuela_Jorge_Angel");
+        var collection = db.GetCollection<Equipo>("Equipo");
+            var lista= collection.Find(FilterDefinition<Equipo>.Empty).ToList();
+            return Ok(lista);
+    }
 
 }
