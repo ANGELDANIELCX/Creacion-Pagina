@@ -24,8 +24,8 @@ public class MyProyectoController : ControllerBase
         MongoClient client = new MongoClient(CadenaConexion.Mongo_DB);
         var db = client.GetDatabase("Escuela_Jorge_Angel");
         var collection = db.GetCollection<Equipo>("Equipo");
-            var lista= collection.Find(FilterDefinition<Equipo>.Empty).ToList();
-            return Ok(lista);
+            var item= collection.Find(FilterDefinition<Equipo>.Empty).FirstOrDefault();
+            return Ok(item);
     }
 
 }
