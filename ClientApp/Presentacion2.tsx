@@ -28,6 +28,17 @@ const cargarDatos =  async ()=> {
         cargarDatos();
     }, []); 
 
+    const formatoFecha = (fecha: string | undefined)=>{
+        if (fecha){
+
+            const formato = new  Intl.DateTimeFormat ("es-MX",{year: "numeric", month: "2-digit", day: "2-digit"});
+            const dt = new Date (fecha);
+            return formato.format(dt);
+        }
+         return undefined;
+
+    }
+
     return(
         <>
             <div className="display-4 text-center">{equipo?.Escuela}</div>
@@ -35,11 +46,11 @@ const cargarDatos =  async ()=> {
             <div className="h1 text-center mt-4">{equipo?.DatosSemestre}</div>
             <div className="h1 text-center">{equipo?.Grupo}</div>
             <div className="h1 text-center mt-4">Integrantes</div>
-            <div className="h2 text-center">{equipo?.Integrante1}</div>
-            <div className="h2 text-center">{equipo?.Integrante2}</div>
+            <div className="h3 text-center text-primary">{equipo?.Integrante1}</div>
+            <div className="h3 text-center text-primary">{equipo?.Integrante2}</div>
             <div className="h1 text-center mt-4">Nombre del Proyecto</div>
-            <div className="h2 text-center">{equipo?.Proyecto}</div>
-            <div className="h4 text-center mt-4">{equipo?.Fecha}</div>
+            <div className="h3 text-center">{equipo?.Proyecto}</div>
+            <div className="h4 text-center mt-4">{formatoFecha(equipo?.Fecha)}</div>
         </>
     )
 }
