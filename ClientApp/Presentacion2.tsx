@@ -20,6 +20,7 @@ const cargarDatos =  async ()=> {
     if(resp.ok){
         const datos = await resp.json(); 
         console.log(datos);
+        setEquipo(datos);
     }
 }
 
@@ -29,11 +30,16 @@ const cargarDatos =  async ()=> {
 
     return(
         <>
-            <div className="display-4">Nombre del cbtis</div>
-            <div className="h1">Integrantes</div>
-            <div className="h2">Nombre del integrante 1</div>
-            <div className="h2">Nombre del integrante 2</div>
-            <div className="h1">Nombre del Proyecto</div>
+            <div className="display-4 text-center">{equipo?.Escuela}</div>
+            <div className="h1 text-center mt-4">{equipo?.Carrera}</div>
+            <div className="h1 text-center mt-4">{equipo?.DatosSemestre}</div>
+            <div className="h1 text-center">{equipo?.Grupo}</div>
+            <div className="h1 text-center mt-4">Integrantes</div>
+            <div className="h2 text-center">{equipo?.Integrante1}</div>
+            <div className="h2 text-center">{equipo?.Integrante2}</div>
+            <div className="h1 text-center mt-4">Nombre del Proyecto</div>
+            <div className="h2 text-center">{equipo?.Proyecto}</div>
+            <div className="h4 text-center mt-4">{equipo?.Fecha}</div>
         </>
     )
 }
