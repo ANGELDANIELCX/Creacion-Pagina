@@ -1,4 +1,24 @@
+import { useState } from "react";
+
+type Usuarios = {
+"Id": string,
+"Nombre": string,
+"Password": string,
+"Correo": string
+}
+
 const Usuarios = ()=> {
+    // Datos
+    const [registros, setRegistros] = useState<Usuarios[]>([]);
+
+    const listarRegistros =  async () =>{
+        const resp= await fetch("/api/usuarios");
+        if(resp.ok){
+            const datos =  await resp.json();
+        }
+
+    }
+    // Vista
     return (
         <>
         <div className="container">
@@ -22,7 +42,7 @@ const Usuarios = ()=> {
                 </div>  
           </div>
 
-          <div className="container">
+          <div className="container mt-4">
             <div className="card">
                 <div className="card-header"> Usuarios existentes</div>
                 <div className="card-body">
@@ -33,16 +53,35 @@ const Usuarios = ()=> {
                                 <th>Nombre</th>
                                 <th>Correo</th>
                                 <th>Password</th>
+                                <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>  
-                                <td>1</td>
-                                <td>Nombre del usuario 1 </td>
-                                <td>Correo del usuario 1 </td>
-                                <td></td>
-                            </tr>
-                        </tbody>
+                        {
+                            registros.length === 0 &&
+                            <tbody>
+                                <tr>
+                                    <td colSpan={5}> No hay registros para mostrar</td>
+                                </tr>
+                            </tbody>
+                        }
+                            {
+                              registros.length > 0 &&
+                            <tbody>
+                                {   registros.map((item, index) =>  
+                                <tr>  
+                                        <td>{index + 1}</td>
+                                        <td>{item.Nombre} </td>
+                                        <td>{item.Correo} </td>
+                                        <td>{item.Password}  </td>
+                                        <td className="d-flex gap-2"> 
+                                            <a className="btn btn-primary" href = {"/usuarios/" + item.Id}>Editar</a>
+                                            <button className="btn btn-danger">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+                            </tbody>
+                            }
                     </table>
                 </div>
             </div>
