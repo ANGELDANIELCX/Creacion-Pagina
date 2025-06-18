@@ -132,16 +132,16 @@ public class ApiUsuariosController : ControllerBase
 
 
         //Validar que el  correro no exista
-        var filter =Builders<Usuario>.Filter.Eq(x => x.Correo, model.Correo);
+        var Filter =Builders<Usuario>.Filter.Eq(x => x.Correo, model.Correo);
         var itemExistente = this.collection.Find(filter).FirstOrDefault();
         if(item !=null && item.Id != id)
         {
             return BadRequest("El correo" + model.Correo + " ya existe en la base de datos ");
         }
-        var UpdateOptions = Builders<Usuario>.Update
+        var updateOptions = Builders<Usuario>.Update
         .Set(x => x.Correo, model.Correo)  
         .Set(x => x.Nombre, model.Nombre)
-        .Set(x => x.Password, model.Password)
+        .Set(x => x.Password, model.Password);
 
         this.collection.UpdateOne(filter, updateOptions);
         
